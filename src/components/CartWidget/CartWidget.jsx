@@ -1,11 +1,11 @@
-import React from "react";
 import { BiShoppingBag } from "react-icons/bi";
+import { IconContext } from "react-icons/lib";
 
 function CartWidget() {
   return (
-    <React.Fragment>
-      <BiShoppingBag size={30}/>
-    </React.Fragment>
+    <IconContext.Provider value={{ color: "white" }}>
+      <BiShoppingBag size={30} />
+    </IconContext.Provider>
   );
 }
 

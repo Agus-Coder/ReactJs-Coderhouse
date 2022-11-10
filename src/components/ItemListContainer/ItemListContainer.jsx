@@ -1,58 +1,56 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { DataSet } from "../../utils/Data";
+import "./ItemListContainer.css";
 
-function ItemListContainer({ greeting }) {
+const ItemListContainer = () => {
   const [prodList, setProdList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { catId } = useParams();
+  const { categoriaId } = useParams();
 
   useEffect(() => {
-    if (catId) {
+    if (categoriaId) {
       DataSet()
-        .then((res) =>
-          setProdList(res.filter((prod) => prod.category === catId))
+        .then((resp) =>
+          setProdList(resp.filter((prod) => prod.category === categoriaId))
         )
+        .then(console.log(prodList))
+        .catch((err) => console.log(err))
         .finally(() => setLoading(false));
     } else {
+      DataSet()
+        .then((resp) => setProdList(resp))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     }
-    DataSet()
-      .then((res) => setProdList(res))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, [catId]);
+  }, [categoriaId]);
 
   return loading ? (
     <h2>Loading awesome things...</h2>
   ) : (
     <div className="container">
       <h1>Store</h1>
-      {prodList.map((obj) => (
-        <div key={obj.id} className="card w-25 mt-2">
-          <Link to={`/detail/${obj.id}`}>
-            <div className="card-header">{obj.name}</div>
-            <div className="card-body">
+      <div className="itemsGrid">
+        {prodList.map((obj) => (
+          <div key={obj.id} className="card w-100 mx-1">
+            <Link to={`/detail/${obj.id}`}>
               <center>
-                <img src={obj.image} className="w-50" />
+                <h5 className="card-header">{obj.name}</h5>
               </center>
-            </div>
-            <div className="card-footer">
-              Category: {obj.category}
-              Price : {obj.price}
-            </div>
-          </Link>
-        </div>
-      ))}
-
-      <div className="row justify-content-center align-items-center">
-        <div className="col-5 divdiv">
-          <h2 className="welcome-message">{greeting}</h2>
-        </div>
+              <div className="card-body">
+                <center>
+                  <img src={`/src/assets/${obj.image}`} className="w-50" />
+                </center>
+              </div>
+              <div className="card-footer">
+                <p>Price: {obj.price}</p>
+              </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default ItemListContainer;
