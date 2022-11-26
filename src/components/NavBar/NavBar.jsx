@@ -15,10 +15,10 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link>
-              <Link to="/category/mandalas">Mandalas</Link>
+              <Link to="/category/Mandala">Mandalas</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/category/remeras">Remeras</Link>
+              <Link to="/category/Manta">Mantas</Link>
             </Nav.Link>
             <Nav.Link>
               <Link to="/about">About Aurica</Link>
