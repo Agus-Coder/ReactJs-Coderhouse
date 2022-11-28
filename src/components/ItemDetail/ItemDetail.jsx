@@ -1,18 +1,21 @@
 import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useCartContext } from "../../Context/CartContext";
 import { DataSet } from "../../utils/Data";
+import ItemCount from "../ItemCount/ItemCount";
 
 export const ItemDetail = () => {
   const [product, setProduct] = useState([]);
   const { productId } = useParams();
 
-  // useEffect(() => {
-  //   DataSet().then((res) => {
-  //     setProduct(res.filter((el) => el.id === productId));
-  //     console.log(product);
-  //   });
-  // }, []);
+  const {cartList, addToCart} = useCartContext()
+
+  const onAdd = (quantity) => {
+    console.log(quantity)
+    addToCart( { ...product, quantity } )
+  }
+
 
   useEffect(() => {
     const db = getFirestore();
@@ -46,6 +49,9 @@ export const ItemDetail = () => {
             {console.log(obj)}
             <div className="card-footer">
               <p>Price: {obj.price}</p>
+            </div>
+            <div>
+              <ItemCount stock={obj.stock} initial={1} onAdd={onAdd} />
             </div>
           </div>
         </center>

@@ -7,11 +7,13 @@ import NavBar from "./components/NavBar/NavBar";
 import CartContextProvider from "./Context/CartContext";
 
 function App() {
-  let greeting = "Welcome to Aurica's Store!";
   return (
     <BrowserRouter>
+
       <CartContextProvider>
+
         <NavBar />
+        
         <Routes>
           <Route path="/" element={<ItemListContainer />} />
           <Route
@@ -19,10 +21,12 @@ function App() {
             element={<ItemListContainer />}
           />
           <Route path="/detail/:productId" element={<ItemDetail />} />
-          {/* <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+
       </CartContextProvider>
+
     </BrowserRouter>
   );
 }
