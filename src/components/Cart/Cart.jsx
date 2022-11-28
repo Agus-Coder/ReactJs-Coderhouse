@@ -1,12 +1,12 @@
 import { useCartContext } from "../../Context/CartContext";
+import EmptyCart from "./EmptyCart";
 
 export const Cart = () => {
+  const { cartList, emptyCart, totalItems } = useCartContext()
 
-  const { cartList, emptyCart } = useCartContext()
-
-  console.log(cartList);
-
-  return (
+  return totalItems() === 0 ? (
+    <EmptyCart totalItems={totalItems()}/>
+  ) : (
     <div>
       <h1>Cart</h1>
       <ul>

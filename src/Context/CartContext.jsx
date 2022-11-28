@@ -10,18 +10,18 @@ const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
 
   const isInCart = (id) => {
-    return cartList.some(el => el.item.id === id);
+    return cartList.some(el => el.id === id);
   };
 
   const addToCart = (itemToAdd, quantity) => {
     if (isInCart(itemToAdd.id)) {
-      const updatedIndex = cartList.findIndex((el) => el.item.id === item.id);
+      const updatedIndex = cartList.findIndex((el) => el.itemToAdd.id === itemToAdd.id);
       cartList[updatedIndex].quantity =
         cartList[updatedIndex].quantity + quantity;
       setCartList([...cartList]);
     } else {
       const newItemToAdd = {
-        item,
+        itemToAdd,
         quantity,
       };
       setCartList([...cartList, newItemToAdd]);

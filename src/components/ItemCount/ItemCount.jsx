@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-
 const ItemCount = ({ stock, initial, onAdd }) => {
   const [counter, setCounter] = useState(initial);
 
