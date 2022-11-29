@@ -2,7 +2,6 @@ import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCartContext } from "../../Context/CartContext";
-import { DataSet } from "../../utils/Data";
 import ItemCount from "../ItemCount/ItemCount";
 
 export const ItemDetail = () => {
@@ -13,7 +12,7 @@ export const ItemDetail = () => {
 
   const onAdd = (quantity) => {
     console.log(quantity)
-    addToCart( { ...product, quantity } )
+    addToCart( { product, quantity } )
   }
 
 
